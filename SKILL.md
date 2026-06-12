@@ -295,10 +295,11 @@ description: AIに渡す完全な指示セット（プロンプト）を丸ご�
   E. その他（教えてください）
 
 【質問2（SNS自動化の場合）: どのSNSと連携しますか？】
-  A. Threads / Instagram（Meta Developer APIが必要）
-  B. X（Twitter API v2が必要・無料枠あり）
-  C. YouTube（YouTube Data APIが必要・無料枠あり）
-  D. 複数SNSを一括管理したい
+  A. Threads（Meta Developer API・無料枠あり・比較的シンプル）
+  B. X（Twitter）（2026年2月から無料枠廃止・従量課金制。テキスト投稿$0.015/件、URLつき$0.20/件）
+  C. Instagram（Graph API・本番利用はApp Review審査が必要・2〜4週間かかる）
+  D. YouTube（YouTube Data APIが必要・無料枠あり）
+  E. 複数SNSを一括管理したい
 
 【質問3: 技術レベルはどのくらいですか？】
   A. プログラミングはほぼできない
@@ -329,8 +330,8 @@ description: AIに渡す完全な指示セット（プロンプト）を丸ご�
 | プラットフォーム | API名 | 無料枠 | 注意点 |
 |----------------|-------|--------|--------|
 | Threads | Threads API（独立API） | あり（レート制限あり） | Meta for Developers（developers.facebook.com）でアプリ作成 → OAuth 2.0でアクセストークン取得。Meta Graph APIとは別物 |
-| Instagram | Instagram Graph API | あり（レート制限あり） | Meta for Developersに登録・審査が必要な場合あり |
-| X（Twitter） | Twitter API v2 | Free: 月1,500投稿まで | 無料枠は制限が厳しい・有料プラン推奨 |
+| Instagram | Instagram Graph API | 開発中（テスト25ユーザーまで）は無料。本番公開はApp Review審査が必要（2〜4週間） | Business/Creatorアカウント＋Facebookページ連携が必須 |
+| X（Twitter） | X API（旧Twitter API） | **2026年2月に無料枠廃止・従量課金制に移行** | テキスト投稿: $0.015/件、URLつき投稿: $0.20/件。自動投稿にはコスト発生。登録先: developer.x.com |
 | YouTube | YouTube Data API v3 | 1日10,000ユニット無料 | 動画投稿は別途要件あり |
 
 #### 自動化システムの構造を必ず説明すること
