@@ -333,32 +333,85 @@ description: AIに渡す完全な指示セット（プロンプト）を丸ご�
 | X（Twitter） | Twitter API v2 | Free: 月1,500投稿まで | 無料枠は制限が厳しい・有料プラン推奨 |
 | YouTube | YouTube Data API v3 | 1日10,000ユニット無料 | 動画投稿は別途要件あり |
 
-#### 自動化ワークフローツール
-| ツール | 無料枠 | 有料プラン | 向いている人 |
-|--------|--------|-----------|------------|
-| n8n（セルフホスト） | 完全無料 | クラウド版あり | 技術力がある人・コスト重視 |
-| Make（旧Integromat） | 月1,000オペレーション | $9/月〜 | ノーコードで本格的に使いたい人 ★おすすめ |
-| Zapier | 月100タスク | $19.99/月〜 | 英語OKで手軽に始めたい人 |
-| Claude Code（ルーティン） | Claudeサブスク内 | 追加課金なし | すでにClaude Codeを使っている人 ★最安 |
+#### 自動化システムの構造を必ず説明すること
 
-#### 推奨構成（Threads自動化の場合）
+SNS自動化のような「AI生成 → 自動投稿」システムは以下の3つの役割で成り立つ。
+ヒアリング後、この構造をユーザーに説明してから構成を提案すること：
+
 ```
-【初心者・低コスト構成】
-Anthropic API（Haiku） → Make（無料枠） → Threads API
-月額: 数百円〜（投稿量による）
+【自動化の3要素】
 
-【Claude Code活用構成】
-Claude Code（ルーティン機能） → Threads API
-月額: Claudeサブスク料金のみ
+① 文章生成AI（頭脳）
+  → Claude（Anthropic API）または ChatGPT（OpenAI API）
+  → 投稿文・コンテンツを生成する役割
+  → これだけでは「生成するだけ」で自動投稿はできない
 
-【本格構成】
-Anthropic API → n8n（セルフホスト） → 複数SNS API一括管理
-月額: APIコストのみ（サーバー代別途）
+② SNS投稿API（手足）
+  → X API / Threads API / Instagram Graph API など
+  → 実際にSNSに投稿する役割
+  → これだけでは「いつ・何を投稿するか」を決められない
+
+③ スケジューラー・連携ツール（司令塔）
+  → Make.com / GAS / GitHub Actions / n8n / Pythonスクリプト など
+  → ①と②をつなぎ、「毎日〇時に実行」などスケジュール管理する役割
+  → ③がないと、毎回手動で実行しないといけない
+```
+
+→ つまり Make.com は「つなぎ役＋スケジューラー」として必要。
+→ ただし Make.com 以外でも同じことができる方法が複数あるため、必ず選択肢を提示すること。
+
+---
+
+#### SNS自動化の構成パターン比較（必ず複数提示すること）
+
+```
+【パターン1: Make.com（ノーコード・視覚的）】
+  Anthropic API → Make.com → X API / Threads API
+  
+  メリット: プログラミング不要・画面で視覚的に組める・エラー通知あり
+  デメリット: 月額費用（無料枠あり）・Make.comへの依存
+  向いている人: コードを書きたくない初心者
+  月額目安: Make.com無料〜$9 + APIコスト
+  ★ノーコードならこれが最もシンプル
+
+【パターン2: GAS（Google Apps Script）】
+  Anthropic API → GAS（Googleスプレッドシート連携可） → X API / Threads API
+  
+  メリット: 無料・Googleアカウントだけで使える・スプレッドシートで投稿管理も可能
+  デメリット: 多少のJavaScript知識が必要・1日の実行時間に上限あり（6分/日）
+  向いている人: Googleツールを使い慣れている人・コストゼロにしたい人
+  月額目安: 0円（APIコストのみ）
+  ★無料で始めるならこれが最強
+
+【パターン3: GitHub Actions】
+  Anthropic API → GitHub Actions（.ymlファイルで定義） → X API / Threads API
+  
+  メリット: 無料（月2,000分まで）・バージョン管理できる・エンジニア向け
+  デメリット: YAMLの記述が必要・GitHubの知識が前提
+  向いている人: GitHubをすでに使っているエンジニア
+  月額目安: 0円（APIコストのみ）
+
+【パターン4: Claude Code ルーティン機能】
+  Claude Code（ルーティン設定） → X API / Threads API
+  
+  メリット: 追加費用なし・Claude Codeだけで完結
+  デメリット: Claude Codeが起動していないと動かない場合あり
+  向いている人: Claude Codeをすでに使っている人
+  月額目安: Claudeサブスク料金のみ
+  ★すでにClaude Codeユーザーならこれが最安
+
+【パターン5: Pythonスクリプト（自由度最高）】
+  Anthropic API → Pythonスクリプト（schedule/cron） → X API / Threads API
+  
+  メリット: 完全な自由度・コストゼロ・複雑なロジックも対応
+  デメリット: Python知識が必要・実行するPCまたはサーバーが常時起動している必要あり
+  向いている人: プログラミングができる人・本格的に自動化したい人
+  月額目安: 0円（サーバー使う場合は別途）
+```
 
 ※ Threads APIの取得:
   developers.facebook.com → アプリ作成 → OAuth 2.0でアクセストークン取得
   参考: https://developers.facebook.com/docs/threads/get-started/
-```
 
 ---
 
