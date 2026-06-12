@@ -323,8 +323,9 @@ description: AIに渡す完全な指示セット（プロンプト）を丸ご�
 #### SNS投稿API
 | プラットフォーム | API名 | 無料枠 | 注意点 |
 |----------------|-------|--------|--------|
-| Threads / Instagram | Meta Graph API | あり（レート制限あり） | Meta for Developersに登録必要・審査が必要な場合あり |
-| X（Twitter） | Twitter API v2 | Free: 月1,500投稿まで | 無料枠は制限が厳しい |
+| Threads | Threads API（独立API） | あり（レート制限あり） | Meta for Developers（developers.facebook.com）でアプリ作成 → OAuth 2.0でアクセストークン取得。Meta Graph APIとは別物 |
+| Instagram | Instagram Graph API | あり（レート制限あり） | Meta for Developersに登録・審査が必要な場合あり |
+| X（Twitter） | Twitter API v2 | Free: 月1,500投稿まで | 無料枠は制限が厳しい・有料プラン推奨 |
 | YouTube | YouTube Data API v3 | 1日10,000ユニット無料 | 動画投稿は別途要件あり |
 
 #### 自動化ワークフローツール
@@ -338,16 +339,20 @@ description: AIに渡す完全な指示セット（プロンプト）を丸ご�
 #### 推奨構成（Threads自動化の場合）
 ```
 【初心者・低コスト構成】
-Anthropic API（Haiku） → Make（無料枠） → Meta Graph API（Threads）
+Anthropic API（Haiku） → Make（無料枠） → Threads API
 月額: 数百円〜（投稿量による）
 
 【Claude Code活用構成】
-Claude Code（ルーティン機能） → Meta Graph API（Threads）
+Claude Code（ルーティン機能） → Threads API
 月額: Claudeサブスク料金のみ
 
 【本格構成】
 Anthropic API → n8n（セルフホスト） → 複数SNS API一括管理
 月額: APIコストのみ（サーバー代別途）
+
+※ Threads APIの取得:
+  developers.facebook.com → アプリ作成 → OAuth 2.0でアクセストークン取得
+  参考: https://developers.facebook.com/docs/threads/get-started/
 ```
 
 ---
