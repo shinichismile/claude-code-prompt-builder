@@ -1,5 +1,12 @@
 # Claude Code Prompt Builder
 
+> ## 🎉 後継スキルができました → [prompt-designer](https://github.com/shinichismile/prompt-designer)
+>
+> このスキルの後継として、**prompt-designer（プロンプト設計係）** を公開しました。
+> 形式の使い分け（自然文／Markdown／XMLタグ／JSON）に対応し、完成したプロンプトに
+> **「なぜこう組んだか」の解説**が毎回付く新設計です。Anthropic公式手法の2026年版に準拠しています。
+> このリポジトリは記録として残しますが、今後の更新はprompt-designer側で行います。
+
 > AIに渡す完全な指示セットを、会話するだけで自動生成するClaude Codeスキル
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://code.claude.com)
